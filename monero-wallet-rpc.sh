@@ -348,7 +348,7 @@ create_wallet() {
 
 # Function to open a wallet
 open_wallet() {
-    curl "$RPC_URL" -s -u  "$RPC_USER":"$RPC_PASSWORD" --digest -d "$(jq -n --argjson filename "$1" --argjson password "$2" '{"jsonrpc":"2.0","id":"0","method":"open_wallet","params":{"filename":$filename,"password":$password}}')" -H 'Content-Type: application/json' | jq
+    curl "$RPC_URL" -s -u  "$RPC_USER":"$RPC_PASSWORD" --digest -d "$(jq -n --arg filename "$1" --arg password "$2" '{"jsonrpc":"2.0","id":"0","method":"open_wallet","params":{"filename":$filename,"password":$password}}')" -H 'Content-Type: application/json' | jq
 }
 
 # Function to close the wallet
