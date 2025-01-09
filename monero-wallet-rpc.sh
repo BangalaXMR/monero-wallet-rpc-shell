@@ -227,12 +227,12 @@ check_spend_proof() {
 
 # Function to get reserve proof
 get_reserve_proof() {
-    curl "$RPC_URL" -s -u  "$RPC_USER":"$RPC_PASSWORD" --digest -d "$(jq -n --arg txid "$1" '{"jsonrpc":"2.0","id":"0","method":"get_reserve_proof","params":{"txid":$txid}}')" -H 'Content-Type: application/json' | jq
+    curl "$RPC_URL" -s -u  "$RPC_USER":"$RPC_PASSWORD" --digest -d "$(jq -n --argjson all "$1" --argjson account_index "$2" --argjson amount "$3" --arg message "$4" '{"jsonrpc":"2.0","id":"0","method":"get_reserve_proof","params":{"all":$all,"account_index":$account_index,"amount":$amount,"message":"$message"}}')" -H 'Content-Type: application/json' | jq
 }
 
 # Function to check reserve proof
 check_reserve_proof() {
-    curl "$RPC_URL" -s -u  "$RPC_USER":"$RPC_PASSWORD" --digest -d "$(jq -n --argjson txid "$1" --argjson reserve_proof "$2" '{"jsonrpc":"2.0","id":"0","method":"check_spend_proof","params":{"txid":$txid,"reserve_proof":$reserve_proof}}')"-H 'Content-Type: application/json' | jq
+    curl "$RPC_URL" -s -u  "$RPC_USER":"$RPC_PASSWORD" --digest -d "$(jq -n --arg address "$1" --arg message "$2" --arg signature "$3" '{"jsonrpc":"2.0","id":"0","method":"check_reserve_proof","params":{"address":"$address","message":"message","signature":"$signature"}}')"-H 'Content-Type: application/json' | jq
 }
 
 # Function to get transfers
