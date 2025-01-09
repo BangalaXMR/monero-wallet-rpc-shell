@@ -130,7 +130,7 @@ sweep_all() {
 
 # Function to sweep a single output
 sweep_single() {
-    curl "$RPC_URL" -s -u  "$RPC_USER":"$RPC_PASSWORD" --digest -d "$(jq -n --arg output_index "$1" '{"jsonrpc":"2.0","id":"0","method":"sweep_single","params":{"output_index":$output_index}}')" -H 'Content-Type: application/json' | jq
+    curl "$RPC_URL" -s -u  "$RPC_USER":"$RPC_PASSWORD" --digest -d "$(jq -n --arg address "$1" --arg key_image "$2" --argjson priority "$3" --argjson get_tx_key "$4"  '{"jsonrpc":"2.0","id":"0","method":"sweep_single","params":{"address":"$address","key_image":"$key_image","priority":$priority,"get_tx_key":$get_tx_key}}')" -H 'Content-Type: application/json' | jq
 }
 
 # Function to relay a transaction
