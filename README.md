@@ -10,6 +10,10 @@ source monero-wallet-rpc.sh
 ```
 For using commands, do:
 ```
-$(command input1)
+command input1
+```
+Or
+```
+command $(command input1)
 ```
 All usage documentation of monero-wallet-rpc is available [here](https://docs.getmonero.org/rpc-library/wallet-rpc/)
