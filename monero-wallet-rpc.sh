@@ -358,7 +358,7 @@ close_wallet() {
 
 # Function to change wallet password
 change_wallet_password() {
-    curl "$RPC_URL" -s -u  "$RPC_USER":"$RPC_PASSWORD" --digest -d "$(jq -n --argjson old_password "$1" --argjson new_password "$2" '{"jsonrpc":"2.0","id":"0","method":"change_wallet_password","params":{"old_password":$old_password,"new_password":$new_password}}')" -H 'Content-Type: application/json' | jq
+    curl "$RPC_URL" -s -u  "$RPC_USER":"$RPC_PASSWORD" --digest -d "$(jq -n --arg old_password "$1" --arg new_password "$2" '{"jsonrpc":"2.0","id":"0","method":"change_wallet_password","params":{"old_password":$old_password,"new_password":$new_password}}')" -H 'Content-Type: application/json' | jq
 }
 
 # Function to generate wallet from keys
