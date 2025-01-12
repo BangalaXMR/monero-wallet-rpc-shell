@@ -29,7 +29,7 @@ stop_rpc() {
 }
 
 rpc_call() {
-    curl "$RPC_URL" -s -u  "$RPC_USER":"$RPC_PASSWORD" --digest -d "$json_payload" -H 'Content-Type: application/json' | jq
+    curl "$RPC_URL" -s -u  "$RPC_USER":"$RPC_PASSWORD" --digest -d "$json_payload" -H 'Content-Type: application/json' | jq '.result'
     # Example: curl "$RPC_URL" -s -u  "$RPC_USER":"$RPC_PASSWORD" --digest -d "$(jq -n --argjson account_index "$1" --argjson address_indices "$2" '{"jsonrpc":"2.0","id":"0","method":"get_balance","params":{"account_index":$account_index,"address_indices":$address_indices}}')" -H 'Content-Type: application/json' | jq
 }
 
