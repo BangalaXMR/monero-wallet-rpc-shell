@@ -35,8 +35,12 @@ rpc_call() {
 
 # Function to get balances
 get_balance() {
-    json_payload=$(jq -n --argjson account_index "$1" --argjson address_indices "$2" '{"jsonrpc":"2.0","id":"0","method":"get_balance","params":{"account_index":$account_index,"address_indices":$address_indices}}')
-    rpc_call
+if [ -z "$2" ]; then
+json_payload=$(jq -n --argjson account_index "$1" '{"jsonrpc":"2.0","id":"0","method":"get_balance","params":{"account_index":$account_index}}')
+else
+json_payload=$(jq -n --argjson account_index "$1" --argjson address_indices "$2" '{"jsonrpc":"2.0","id":"0","method":"get_balance","params":{"account_index":$account_index,"address_indices":$address_indices}}')
+fi
+rpc_call
 }
 
 # Function to get wallet address
