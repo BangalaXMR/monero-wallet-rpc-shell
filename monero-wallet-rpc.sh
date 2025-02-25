@@ -153,7 +153,7 @@ sweep_dust() {
 
 # Function to sweep all funds
 sweep_all() {
-    json_payload=$(jq -n '{"jsonrpc":"2.0","id":"0","method":"sweep_all"}')
+    json_payload=$(jq -n --arg address "$1" --argjson priority "$2" --argjson get_tx_key "$3" '{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"address":"$address","priority":$priority,"get_tx_key":$get_tx_key}}')
     rpc_call
 }
 
